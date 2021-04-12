@@ -3,6 +3,7 @@ import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
   name: string;
+
   email: string;
 }
 
@@ -10,9 +11,9 @@ class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ email, name }: IRequest): User {
-    if (!email || !name) {
-      throw new Error("Data invalid")
-    }
+    // if (!email || !name) {
+    //   throw new Error("Data invalid");
+    // }
 
     const userExists = this.usersRepository.findByEmail(email);
 
@@ -22,8 +23,9 @@ class CreateUserUseCase {
 
     const newUser = this.usersRepository.create({
       email,
-      name
-    })
+
+      name,
+    });
 
     return newUser;
   }
